@@ -17,7 +17,7 @@ void setup()
 }
 
 void loop() {
-  Serial.println(irrecv.decode(&results));
+  //Serial.println(irrecv.decode(&results)); Juju debug print
   if (irrecv.decode(&results)) {
     Serial.println(results.value, HEX);
     irrecv.resume(); // Receive the next value
