@@ -1,6 +1,6 @@
 #include "IRremote.h"
 
-int RECV_PIN = 14;
+int RECV_PIN = 4;
 int e_Pin = 25;
 IRrecv irrecv(RECV_PIN);
 IRsend irsend(e_Pin);
@@ -49,8 +49,8 @@ void loop() {
     Serial.println(results.value, HEX);
     irrecv.resume(); // Receive the next value
   }
-  storeCode();
-  irsend.sendRaw(rawCodes, codeLen, 38);
+  storeCode(&results);
+//  irsend.sendRaw(rawCodes, codeLen, 38);
 
     //digitalWrite(e_Pin, HIGH);
 
