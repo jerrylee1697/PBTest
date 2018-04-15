@@ -8,7 +8,7 @@
 // https://github.com/256dpi/arduino-mqtt
 
 #include <WiFi.h>
-#include "src/MQTT.h"
+#include "MQTT/MQTT.h"
 
 const char ssid[] = "ssid";
 const char pass[] = "pass";
