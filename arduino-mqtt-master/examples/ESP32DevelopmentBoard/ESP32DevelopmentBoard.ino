@@ -10,12 +10,16 @@
 #include <WiFi.h>
 #include "MQTT/MQTT.h"
 
-const char ssid[] = "ssid";
-const char pass[] = "pass";
+const char ssid[] = "CalPlugIoT";
+const char pass[] = "A8E61C58F8";
 
 WiFiClient net;
 MQTTClient client;
+//MQTTClient client("m12.cloudmqtt.com", 15384, callback);  //NOTE:  Editted for PB Port # on CloudMQTT
 
+const char* MQTTServerName = "m12.cloudmqtt.com";
+const char* MQTTUserName = "cebdwdic";
+const char* MQTTPassword = "Ztea94td0S4s";
 unsigned long lastMillis = 0;
 
 void connect() {
@@ -26,7 +30,7 @@ void connect() {
   }
 
   Serial.print("\nconnecting...");
-  while (!client.connect("arduino", "try", "try")) {
+   while (!client.connect(MQTTServerName, MQTTUserName, MQTTPassword)) {
     Serial.print(".");
     delay(1000);
   }
@@ -44,10 +48,11 @@ void messageReceived(String &topic, String &payload) {
 void setup() {
   Serial.begin(115200);
   WiFi.begin(ssid, pass);
+  Serial.println("Setup Right Here");
 
   // Note: Local domain names (e.g. "Computer.local" on OSX) are not supported by Arduino.
   // You need to set the IP address directly.
-  client.begin("broker.shiftr.io", net);
+  client.begin(MQTTServerName, 15384, net);
   client.onMessage(messageReceived);
 
   connect();
@@ -62,7 +67,7 @@ void loop() {
   }
 
   // publish a message roughly every second.
-  if (millis() - lastMillis > 1000) {
+  if (millis() - lastMillis > 10000) {
     lastMillis = millis();
     client.publish("/hello", "world");
   }
