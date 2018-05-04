@@ -7,7 +7,7 @@
 
 //Define ADE7953 object with hardware parameters specified
 #define local_SPI_freq 1000000  //Set SPI_Freq at 1MHz (#define, (no = or ;) helps to save memory)
-#define local_SS 14  //Set the SS pin for SPI communication as pin 5  (#define, (no = or ;) helps to save memory)
+#define local_SS 5  //Set the SS pin for SPI communication as pin 5  (#define, (no = or ;) helps to save memory)
 ADE7953 myADE7953(local_SS, local_SPI_freq); // Call the ADE7953 Object with hardware parameters specified, the "local" lets us use the same parameters for examples in this program as what is assigned to the ADE7953 object
 
 
